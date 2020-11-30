@@ -18,17 +18,17 @@ John Doe john.doe@uzh.ch
 Joe Doe joe.doe@uzh.ch
 ```
 
-A folder called ```HWN```, where ```N``` stands for the homework number which files are saved. Ex: ```HW7```. Save the homeworks in this folder after correction. The name of the files in the folder shpuld follow the same pattern the students are required to follow.
+* A folder called ```HWN```, where ```N``` stands for the homework number which files are saved. Ex: ```HW7```. Save the homeworks in this folder after correction. The name of the files in the folder should follow the same pattern the students are required to follow.
 
 # Running the script:
 
 ```bash
-python send_emails.py --saner your.email@uzh.ch --pwd YOURPASSWORD --HW N
+python send_emails.py --sender your.email@uzh.ch --pwd YOURPASSWORD --HW N
 ```
 
 Before sending, verify in the screen if all students are associated to the respective homeworks and emails. If everything seems right, run the same code again, but with the flag ```--send```:
 
 ```bash
-python send_emails.py --saner your.email@uzh.ch --pwd YOURPASSWORD --HW N --send
+python send_emails.py --sender your.email@uzh.ch --pwd YOURPASSWORD --HW N --send
 ```
 
