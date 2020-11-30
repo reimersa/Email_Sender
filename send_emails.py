@@ -36,7 +36,7 @@ def CreateSession(flags,message):
     text = message.as_string()
     session.sendmail(flags.sender, message['To'], text)
     session.quit()
-    print('Mail Sent to {}'.format(message['To']))
+    print('Mail Sent to {}\n\n'.format(message['To']))
 
 def GetStudentInfo(HW,names='students.txt'):
     ''' Find the name, email and respective homework attachment for each student.
@@ -60,7 +60,7 @@ def GetStudentInfo(HW,names='students.txt'):
                     if name.lower() in homework.lower() and surname.lower() in homework.lower():
                         return os.path.join("HW{}".format(HW),homework)
                     
-                print("Student {} didn't hand the homework".format(name))
+                print("Student '{} {}' didn't hand the homework".format(name, surname))
                 return None
             
             if GetFile(name,surname,HW) != None:
