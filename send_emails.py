@@ -60,8 +60,6 @@ def GetStudentInfo(HW,names='students.txt'):
                 if surname.split(" ")[-1] != surname:
                     surname = surname.split(" ")[-1]
                 for homework in homeworks:
-                    homework = homework
-                    print(homework)
                     if name.lower().decode('UTF-8') in homework.lower() and surname.lower().decode('UTF-8') in homework.lower(): #TODO: implement accent support 
 
                         return os.path.join("HW{}".format(HW),homework)
