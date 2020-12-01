@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -6,6 +7,8 @@ from email import encoders
 from email.mime.application import MIMEApplication
 from optparse import OptionParser
 import os
+import unicodedata
+import codecs
 
 
 
@@ -36,14 +39,14 @@ def CreateSession(flags,message):
     text = message.as_string()
     session.sendmail(flags.sender, message['To'], text)
     session.quit()
-    print('Mail Sent to {}'.format(message['To']))
+    print('Mail Sent to {}\n\n'.format(message['To']))
 
 def GetStudentInfo(HW,names='students.txt'):
     ''' Find the name, email and respective homework attachment for each student.
     Returns a dictionary containing the student's name, email and corresponding pdf file
     '''
     students={}
-    with open(names,'r') as f:
+    with codecs.open(names,'r', encoding="utf-8") as f:
         lines = f.readlines()
         for line in lines:
             line = line.strip('\n')
@@ -51,16 +54,17 @@ def GetStudentInfo(HW,names='students.txt'):
             surname = line.split('\t')[0]
 
             def GetFile(name,surname,HW):
-                homeworks = os.listdir("HW{}".format(HW))
+                homeworks = [unicodedata.normalize('NFC', f) for f in os.listdir(u"HW{}".format(HW))]
                 if name.split(" ")[-1] != name:
                     name = name.split(" ")[-1]
                 if surname.split(" ")[-1] != surname:
                     surname = surname.split(" ")[-1]
                 for homework in homeworks:
-                    if name.lower() in homework.lower() and surname.lower() in homework.lower():
+                    if name.lower().decode('UTF-8') in homework.lower() and surname.lower().decode('UTF-8') in homework.lower(): #TODO: implement accent support 
+
                         return os.path.join("HW{}".format(HW),homework)
                     
-                print("Student {} didn't hand the homework".format(name))
+                print("Student '{} {}' didn't hand the homework".format(name, surname))
                 return None
             
             if GetFile(name,surname,HW) != None:
@@ -86,6 +90,9 @@ Vinicius
         if flags.send:
             msg = MIMESETUP(flags,names[name]['email'],subject,base_email,names[name]['file'])
             CreateSession(flags,msg)
+
+def RemoveSpecialCharacters(string): 
+    return "".join(e for e in string if e.isalnum())
 
     
 
