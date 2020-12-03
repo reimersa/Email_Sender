@@ -18,7 +18,7 @@ John Doe john.doe@uzh.ch
 Joe Doe joe.doe@uzh.ch
 ```
 
-* A folder called ```HWN```, where ```N``` stands for the homework number which files are saved. Ex: ```HW7```. Save the homeworks in this folder after correction. The name of the files in the folder should follow the same pattern the students are required to follow.
+* A folder called ```HWN```, where ```N``` stands for the homework number which files are saved. Ex: ```HW7```. Save the homeworks in this folder after correction. The name of the files in the folder should follow the same pattern the students are required to follow. In the script itself, change the default message to your liking.
 
 # Running the script:
 
