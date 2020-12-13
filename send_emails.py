@@ -9,6 +9,10 @@ from optparse import OptionParser
 import os
 import unicodedata
 import codecs
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 
